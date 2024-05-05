@@ -1,0 +1,97 @@
+{
+  "name": "session",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/remotes/session/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/remotes/session",
+        "index": "apps/remotes/session/src/index.html",
+        "baseHref": "/",
+        "main": "apps/remotes/session/src/main.ts",
+        "tsConfig": "apps/remotes/session/tsconfig.app.json",
+        "assets": [
+          "apps/remotes/session/src/favicon.ico",
+          "apps/remotes/session/src/assets"
+        ],
+        "styles": ["apps/remotes/session/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/remotes/session/webpack.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/remotes/session/src/environments/environment.ts",
+              "with": "apps/remotes/session/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/remotes/session/webpack.config.prod.ts"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "session:build",
+        "hmr": true,
+        "port": 4209
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "session:build:development"
+        },
+        "production": {
+          "buildTarget": "session:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/remotes/session/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "session:build",
+        "watch": false,
+        "port": 4209
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "session:build:development"
+        },
+        "production": {
+          "buildTarget": "session:build:production"
+        }
+      }
+    }
+  }
+}

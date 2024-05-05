@@ -1,0 +1,97 @@
+{
+  "name": "trades",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/remotes/trades/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/remotes/trades",
+        "index": "apps/remotes/trades/src/index.html",
+        "baseHref": "/",
+        "main": "apps/remotes/trades/src/main.ts",
+        "tsConfig": "apps/remotes/trades/tsconfig.app.json",
+        "assets": [
+          "apps/remotes/trades/src/favicon.ico",
+          "apps/remotes/trades/src/assets"
+        ],
+        "styles": ["apps/remotes/trades/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/remotes/trades/webpack.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/remotes/trades/src/environments/environment.ts",
+              "with": "apps/remotes/trades/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/remotes/trades/webpack.config.prod.ts"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "trades:build",
+        "hmr": true,
+        "port": 4203
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "trades:build:development"
+        },
+        "production": {
+          "buildTarget": "trades:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/remotes/trades/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "trades:build",
+        "watch": false,
+        "port": 4203
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "trades:build:development"
+        },
+        "production": {
+          "buildTarget": "trades:build:production"
+        }
+      }
+    }
+  }
+}

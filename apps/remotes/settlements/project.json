@@ -1,0 +1,97 @@
+{
+  "name": "settlements",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/remotes/settlements/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/remotes/settlements",
+        "index": "apps/remotes/settlements/src/index.html",
+        "baseHref": "/",
+        "main": "apps/remotes/settlements/src/main.ts",
+        "tsConfig": "apps/remotes/settlements/tsconfig.app.json",
+        "assets": [
+          "apps/remotes/settlements/src/favicon.ico",
+          "apps/remotes/settlements/src/assets"
+        ],
+        "styles": ["apps/remotes/settlements/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/remotes/settlements/webpack.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/remotes/settlements/src/environments/environment.ts",
+              "with": "apps/remotes/settlements/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/remotes/settlements/webpack.config.prod.ts"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "settlements:build",
+        "hmr": true,
+        "port": 4206
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "settlements:build:development"
+        },
+        "production": {
+          "buildTarget": "settlements:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/remotes/settlements/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "settlements:build",
+        "watch": false,
+        "port": 4206
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "settlements:build:development"
+        },
+        "production": {
+          "buildTarget": "settlements:build:production"
+        }
+      }
+    }
+  }
+}

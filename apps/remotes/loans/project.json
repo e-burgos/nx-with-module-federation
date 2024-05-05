@@ -1,0 +1,97 @@
+{
+  "name": "loans",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/remotes/loans/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/remotes/loans",
+        "index": "apps/remotes/loans/src/index.html",
+        "baseHref": "/",
+        "main": "apps/remotes/loans/src/main.ts",
+        "tsConfig": "apps/remotes/loans/tsconfig.app.json",
+        "assets": [
+          "apps/remotes/loans/src/favicon.ico",
+          "apps/remotes/loans/src/assets"
+        ],
+        "styles": ["apps/remotes/loans/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/remotes/loans/webpack.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/remotes/loans/src/environments/environment.ts",
+              "with": "apps/remotes/loans/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/remotes/loans/webpack.config.prod.ts"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "loans:build",
+        "hmr": true,
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "loans:build:development"
+        },
+        "production": {
+          "buildTarget": "loans:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/remotes/loans/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "loans:build",
+        "watch": false,
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "loans:build:development"
+        },
+        "production": {
+          "buildTarget": "loans:build:production"
+        }
+      }
+    }
+  }
+}

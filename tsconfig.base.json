@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "collateral/Module": ["apps/remotes/collateral/src/remote-entry.ts"],
+      "counterparties/Module": [
+        "apps/remotes/counterparties/src/remote-entry.ts"
+      ],
+      "dashboard/Module": ["apps/remotes/dashboard/src/remote-entry.ts"],
+      "derivatives/Module": ["apps/remotes/derivatives/src/remote-entry.ts"],
+      "loans/Module": ["apps/remotes/loans/src/remote-entry.ts"],
+      "session/Module": ["apps/remotes/session/src/remote-entry.ts"],
+      "settings/Module": ["apps/remotes/settings/src/remote-entry.ts"],
+      "settlements/Module": ["apps/remotes/settlements/src/remote-entry.ts"],
+      "trades/Module": ["apps/remotes/trades/src/remote-entry.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
