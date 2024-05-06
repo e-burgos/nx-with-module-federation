@@ -57,6 +57,13 @@ Learn more about [Tutorial](https://nx.dev/concepts/module-federation/faster-bui
 
 4. If you want to serve a remote application, run `npx nx run app-name:serve --open`.
 
+### Add libraries to the project
+
+1. Run `nx g @nx/react:library ui --directory=libs/ui` to generate a library. You can use the `--directory` flag to specify.
+   ✔ Which stylesheet format would you like to use? · css
+   ✔ Which runner would you like to use? · none
+   ✔ What should be the project name and where should it be generated? · as provider
+
 ### Add Remote Storybook to the project
 
 1. Run `nx g @nx/react:remote ui --host=host --directory=apps/shared/ui` to generate a remote application. You can use the `--directory` flag to specify.
