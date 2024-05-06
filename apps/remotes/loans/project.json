@@ -58,7 +58,8 @@
       },
       "configurations": {
         "development": {
-          "buildTarget": "loans:build:development"
+          "buildTarget": "loans:build:development",
+          "liveReload": true
         },
         "production": {
           "buildTarget": "loans:build:production",
