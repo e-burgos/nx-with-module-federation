@@ -60,8 +60,8 @@ Learn more about [Tutorial](https://nx.dev/concepts/module-federation/faster-bui
 ### Add libraries to the project
 
 1. Run `nx g @nx/react:library ui --directory=libs/ui` to generate a library. You can use the `--directory` flag to specify.
-   ✔ Which stylesheet format would you like to use? · css
-   ✔ Which runner would you like to use? · none
+   ✔ What unit test runner should be used? · jest
+   ✔ Which bundler would you like to use to build the library? Choose 'none' to skip build setup · none
    ✔ What should be the project name and where should it be generated? · as provider
 
 ### Add Remote Storybook to the project
