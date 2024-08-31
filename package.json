@@ -4,9 +4,10 @@
   "license": "MIT",
   "scripts": {
     "start": "npx nx serve host --open",
-    "start:dashboard": "npx nx run dashboard:serve --open",
+    "dev:dashboard": "npx nx run dashboard:serve",
+    "dev:loans": "npx nx run loans:serve",
     "targets:host": "npx nx show project host --web",
-    "dev:all": "npx nx serve host --open --devRemotes='dashboard,loans,session,settings,wallets'",
+    "dev:all": "npx nx serve host --open --devRemotes='dashboard,loans,session,settings,collateral,trades,derivatives,counterparties,settlements'",
     "build": "npx nx run-many --target=build --all",
     "lint": "npx nx run-many --target=lint --all",
     "test": "npx nx run-many --target=test --all",
@@ -55,6 +56,10 @@
     "typescript": "~5.4.2"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.16",
+    "@mui/material": "^5.15.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.11.2",

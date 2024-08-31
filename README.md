@@ -57,18 +57,25 @@ Learn more about [Tutorial](https://nx.dev/concepts/module-federation/faster-bui
 
 4. If you want to serve a remote application, run `npx nx run app-name:serve --open`.
 
+### Add libraries to the project
+
+1. Run `nx g @nx/react:library ui --directory=libs/ui` to generate a library. You can use the `--directory` flag to specify.
+   ✔ What unit test runner should be used? · jest
+   ✔ Which bundler would you like to use to build the library? Choose 'none' to skip build setup · none
+   ✔ What should be the project name and where should it be generated? · as provider
+
 ### Add Remote Storybook to the project
 
-1. Run `nx g @nx/react:remote ui --host=host --directory=apps/shared/ui` to generate a remote application. You can use the `--directory` flag to specify.
+1. Run `nx g @nx/react:remote ui-name --host=host --directory=apps/shared/ui-name` to generate a remote application. You can use the `--directory` flag to specify.
    ✔ Which stylesheet format would you like to use? · css
    ✔ Which E2E test runner would you like to use? · none
    ✔ What should be the project name and where should it be generated? · as provider
 
-2. Run `nx g @nx/react:storybook-configuration ui` to setup ui project with Storybook.
+2. Run `nx g @nx/react:storybook-configuration ui-name` to setup ui project with Storybook.
 
 3. Run `npx nx add @nx/storybook` to add Storybook support to your workspace.
 
-4. Run `nx storybook ui -p 6006 -s public` to serve Storybook.
+4. Run `nx storybook ui-name -p 6006 -s public` to serve Storybook.
 
 ## Integrate with editors
 

@@ -1,13 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
+import { NxWelcome, Layout } from '@membrane-webapp-mfe/ui';
 
-import NxWelcome from './nx-welcome';
+export interface AppProps {
+  withHost?: boolean;
+}
 
-export function App() {
+export function App({ withHost }: AppProps) {
   return (
-    <div>
+    <Layout withFrame={!withHost}>
       <NxWelcome title="trades" />
-    </div>
+    </Layout>
   );
 }
 
